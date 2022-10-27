@@ -1,5 +1,6 @@
-import 'package:e_ticaret_uygulamasi/pages/home/home_page.dart';
+import 'package:e_ticaret_uygulamasi/constants.dart';
 import 'package:flutter/material.dart';
+import 'pages/home_page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          appBarTheme: AppBarTheme(backgroundColor: AppColors.bgColor)),
       home: const HomePage(),
     );
   }
