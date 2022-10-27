@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:e_ticaret_uygulamasi/constants.dart';
 import 'package:e_ticaret_uygulamasi/models/product_model.dart';
+import 'package:e_ticaret_uygulamasi/models/product_service_model.dart';
+import 'package:e_ticaret_uygulamasi/pages/product_page/components/product_card.dart';
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatefulWidget {
@@ -11,20 +13,19 @@ class ProductPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<ProductPage> {
-  List<ProductModel>? _items;
+  List<ProductServiceModel>? _items;
 
   Future fetchPostProduct() async {
     final response = await Dio().get("https://demoapi.webudi.tech/api/products",
         options: Options(headers: {
           "Content-Type": "application/json",
-          "Authorization":
-              "Bearer 869|41xD0qOtti7UEo0qG6V73Kw06Bpl0GwT9ANNKPzJ",
+          "Authorization": "869|41xD0qOtti7UEo0qG6V73Kw06Bpl0GwT9ANNKPzJ",
         }));
     if (response.statusCode == 200) {
       final datas = response.data;
       if (datas is List) {
         setState(() {
-          _items = datas.map((e) => ProductModel.fromJson(e)).toList();
+          _items = datas.map((e) => ProductServiceModel.fromJson(e)).toList();
         });
       }
     } else {
@@ -37,17 +38,24 @@ class _HomePageState extends State<ProductPage> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: buildAppBar(),
-      body: ListView.builder(
-        itemCount: _items?.length ?? 0,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 300,
-            height: 50,
-            color: Colors.red,
-            child: Text(""),
-          );
-        },
-      ),
+      body: Column(children: [
+        Expanded(
+          flex: 10,
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: 8,
+            itemBuilder: (context, index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ProductCard(item: Items.item1),
+                  ProductCard(item: Items.item1),
+                ],
+              );
+            },
+          ),
+        ),
+      ]),
     );
   }
 }
@@ -69,7 +77,7 @@ AppBar buildAppBar() {
       IconButton(
           onPressed: () {},
           icon: const Icon(
-            Icons.shopping_basket,
+            Icons.notifications,
             color: Colors.blue,
           ))
     ],

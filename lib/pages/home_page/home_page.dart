@@ -1,6 +1,7 @@
+import 'package:e_ticaret_uygulamasi/pages/basket_page/basket_page.dart';
 import 'package:e_ticaret_uygulamasi/pages/product_page/product_page.dart';
 import 'package:e_ticaret_uygulamasi/pages/profil_page/profil_page.dart';
-import 'package:e_ticaret_uygulamasi/pages/sign_in_up/password_page.dart';
+import 'package:e_ticaret_uygulamasi/pages/auth_page/password_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +17,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BasketPage(),
+            )),
+        child: Icon(Icons.shopping_basket),
+      ),
       body: tabs[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
